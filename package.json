@@ -1,0 +1,15 @@
+{
+  "name": "js-tools-function",
+  "version": "0.0.4",
+  "main": "./dist/js-tools-function.js",
+  "license": "MIT",
+  "description": "自定义函数库",
+  "keywords": [
+    "object",
+    "array",
+    "vue",
+    "event-bus",
+    "promise"
+  ],
+  "author": "zhenwei"
+}
