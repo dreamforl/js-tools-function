@@ -1,16 +1,16 @@
 ##### #自定义js函数，包括手写函数以及常用工具库
 
-### 安装 
+# 安装 
 
 yarn add js-tools-function
 
-### 或者
+## 或者
 
 npm install js-tools-function
 
 
 
-### 使用
+# 使用
 
 需要开启服务才可以使用
 
@@ -20,11 +20,11 @@ import fun from 'js-tools-function'
 
 
 
-### 目前包含的函数有
+# 目前包含的函数有
 
-#### 手写函数部分
+## 手写函数部分
 
-##### 		改变this指向
+### 		改变this指向
 
 1. call(fn , obj , ...args)
 
@@ -32,7 +32,7 @@ import fun from 'js-tools-function'
 
 3. bind(fn , obj , ...args)
 
-##### 函数防抖
+### 函数防抖
 
 1. debonceAtonce(fn,time)://函数防抖-立即执行版(时间戳版本)
 
@@ -40,7 +40,7 @@ import fun from 'js-tools-function'
   
 3. deepClone(fn)://深拷贝 （只能拷贝简单对象）
 
-##### 数组部分
+### 数组部分
 
 1. **forEach**(list , callback) :遍历数组
 
@@ -84,7 +84,7 @@ import fun from 'js-tools-function'
 
 
 
-#### 工具库部分
+### 工具库部分
 
 
 
