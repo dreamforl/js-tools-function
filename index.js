@@ -1,15 +1,43 @@
-/*
- * @Author: zw
- * @Date: 2021-07-25 20:04:10
- * @Description: 
- * @params: 
- */
-import {call , apply , bind , debonceAtonce , debonceLatter} from './dist/function'
+import {
+  call,
+  apply,
+  bind,
+  throttleAtonce,
+  throttleLatter,
+  deepClone,
+  debonce,
+  format
+} from './dist/function'
+
+import {
+  forEach,
+  map,
+  filter,
+  every,
+  some,
+  find,
+  findindex,
+  reduce,
+} from './dist/array'
+
 
 export default {
   call,
   apply,
   bind,
-  debonceAtonce,
-  debonceLatter
+  throttleAtonce,
+  throttleLatter,
+  deepClone,
+  debonce,
+  format,
+
+
+  forEach,
+  map,
+  filter,
+  every,
+  some,
+  find,
+  findindex,
+  reduce,
 }
