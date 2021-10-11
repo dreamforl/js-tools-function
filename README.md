@@ -24,15 +24,15 @@ import tools from 'js-tools-function'
 
 **函数节流**
 ```javascript
-throttleAtonce(function,timeout)
+tools.throttleAtonce(function,timeout)
 ```
 ```javascript
-throttleLatter(function,timeout)
+tools.throttleLatter(function,timeout)
 ```
 
 **函数防抖**
 ```javascript
-debonce(function,timeout)
+tools.debonce(function,timeout)
 ```
 
 **格式化日期**
@@ -42,19 +42,31 @@ debonce(function,timeout)
 不传str默认样式为:  YYYY-MM-DD hh:mm:ss
 
 ```javascript
-format(str,time)
+tools.format(str,time)
 ```
 
 **base64转png**
 
 ```javascript
-base64ToBlob(base64)
+tools.base64ToBlob(base64)
 ```
 
 **将制定内容复制到剪切板**
 
 ```javascript
-copyToBoard(str)
+tools.copyToBoard(str)
+```
+
+**canvas图片灰度**
+
+```javascript
+tools.pictureGray(el)
+```
+
+**返回参数的类型字符串（首字母是大写）**
+
+```javascript
+tools.type(any)
 ```
 
 
