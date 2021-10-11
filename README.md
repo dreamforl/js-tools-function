@@ -26,6 +26,7 @@ import tools from 'js-tools-function'
 ```javascript
 tools.throttleAtonce(function,timeout)
 ```
+
 ```javascript
 tools.throttleLatter(function,timeout)
 ```
