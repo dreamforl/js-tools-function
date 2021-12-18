@@ -7,7 +7,9 @@
  *  time:触发的时间间隙
  * @return undefined 
  */
-export function throttleAtonce(fn, time) {
+import ToexportExcel from './exportExcel'
+export const exportExcel = ToexportExcel
+export function throttleAtonce (fn, time) {
   let previous = 0;
   return function () {
     let now = Date.now();
@@ -27,7 +29,7 @@ export function throttleAtonce(fn, time) {
  *  time:触发的时间间隙
  * @return undefined 
  */
-export function throttleLatter(fn, time) {
+export function throttleLatter (fn, time) {
   let timeout = '';
   return function () {
     if (!timeout) {
@@ -48,7 +50,7 @@ export function throttleLatter(fn, time) {
  *  time:触发的时间间隙
  * @return undefined
  */
-export function debonce(func, time) {
+export function debonce (func, time) {
   let timeout
   return function () {
     if (timeout) {
@@ -67,7 +69,7 @@ export function debonce(func, time) {
  * @param {time} str  Date对象，也可以不传
  * @return String 
  */
-export function format(str, time) {
+export function format (str, time) {
   if (!time) {
     time = new Date();
   }
@@ -86,7 +88,7 @@ export function format(str, time) {
 }
 
 // base64转化为png
-export function base64ToBlob(base64) {
+export function base64ToBlob (base64) {
   let arr = base64.split(',');
   let mime = arr[0].match(/:(.*?);/)[1];
   let bstr = atob(arr[1]);
@@ -106,7 +108,7 @@ export function base64ToBlob(base64) {
  * @param {String}  value
  * @return {undefined} 
  */
-export function copyToBoard(value) {
+export function copyToBoard (value) {
   const element = document.createElement('textarea')
   document.body.appendChild(element)
   element.value = value
@@ -126,7 +128,7 @@ export function copyToBoard(value) {
  * @param {Object | String}   el 选择器或者是canvas对象
  * @return {} 
  */
-export function pictureGray(el) {
+export function pictureGray (el) {
   let str = Object.prototype.toString.call(el).slice(8, -1)
   if (str !== 'String' && str !== 'HTMLCanvasElement') {
     throw new Error('请传入cnavas的选择器或者是cnavas对象')
@@ -159,7 +161,7 @@ export function pictureGray(el) {
  * @param {any} params  
  * @return {string} 参数的类型
  */
-export function type(params) {
-  let str = Object.prototype.toString.call(params).slice(8, -1)
+export function type (params) {
+  let str = Object.prototype.toString.call(params).slice(8, -1).toLowerCase();
   return str
 }
