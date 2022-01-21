@@ -131,7 +131,6 @@ let options = {
 tools.exportExcel(options)
 ```
 
-<img src="C:\Users\10334\AppData\Roaming\Typora\typora-user-images\image-20211218105901832.png" alt="image-20211218105901832" style="zoom: 80%;" />
 
 
 
