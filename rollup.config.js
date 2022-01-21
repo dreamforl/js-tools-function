@@ -3,9 +3,6 @@ import {
 } from 'rollup-plugin-terser'
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
-import postcss from 'rollup-plugin-postcss'
-import autoprefixer from 'autoprefixer'
-import cssnano from 'cssnano'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 export default {
@@ -25,13 +22,6 @@ export default {
       }
     }),
     commonjs(),
-    postcss({
-      plugins: [
-        autoprefixer(),
-        cssnano()
-      ],
-      extract: 'index.css'
-    }),
     serve({
       contentBase: './dist', //服务器启动的文件夹，默认是项目根目录，需要在该文件下创建index.html
       port: 8020 //端口号，默认10001

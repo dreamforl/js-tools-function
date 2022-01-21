@@ -135,7 +135,11 @@ tools.exportExcel(options)
 
 
 
-### D 
+### 其他语言的sleep
+sleep
+```javascript
+sleep(1000).then(()=>{console.log('过了100ms')})
+```
 
 
 

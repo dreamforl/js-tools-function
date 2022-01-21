@@ -161,7 +161,18 @@ export function pictureGray (el) {
  * @param {any} params  
  * @return {string} 参数的类型
  */
-export function type (params) {
+ export function type (params) {
   let str = Object.prototype.toString.call(params).slice(8, -1).toLowerCase();
   return str
 }
+
+/**
+ * @function_name sleep
+ * @description 过time毫秒后执行任务
+ * @param {any} params  
+ * @return {Promise} 一个promise
+ */
+ export function sleep (time) {
+  return new Promise(resolve=>setTimeout(resolve, time))
+}
+
