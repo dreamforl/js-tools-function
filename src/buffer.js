@@ -22,3 +22,33 @@ function strToBuffer(str) {
 function bufferToStr(buf) {
   return String.fromCharCode.apply(null, new Uint16Array(buf));
 }
+
+/**
+ * @function_name Uint8ArrayToString
+ * @description Uint8Array转化为字符串
+ * @param Uint8Array
+ * @return string
+ */
+function Uint8ArrayToString(fileData) {
+  var dataString = "";
+  for (var i = 0; i < fileData.length; i++) {
+    dataString += String.fromCharCode(fileData[i]);
+  }
+  return dataString;
+}
+
+/**
+ * @function_name stringToUint8Array
+ * @description 字符串转化为Uint8Array
+ * @param string
+ * @return Uint8Array
+ */
+function stringToUint8Array(str) {
+  var arr = [];
+  for (var i = 0, j = str.length; i < j; ++i) {
+    arr.push(str.charCodeAt(i));
+  }
+
+  var tmpUint8Array = new Uint8Array(arr);
+  return tmpUint8Array;
+}
