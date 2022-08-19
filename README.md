@@ -140,5 +140,20 @@ sleep
 sleep(1000).then(()=>{console.log('过了100ms')})
 ```
 
+### 深拷贝
+
+deepCopy
+
+解决：函数、对象、数组、正则、日期、循环依赖等的深拷贝
+
+```js
+import { deepCopy } from 'tools'
+const newObject = deepCopy({
+  name: 1,
+  show: () => {
+    console.log(1)
+  },
+})
+```
 
 
