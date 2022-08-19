@@ -9,8 +9,10 @@
  */
 import ToexportExcel from './exportExcel'
 import toDeepCopy from './deepCopy'
+import toZwFetch from './fetch'
 export const deepCopy = toDeepCopy
 export const exportExcel = ToexportExcel
+export const zwFetch = toZwFetch
 export function throttleAtonce(fn, time) {
   let previous = 0
   return function () {

@@ -147,7 +147,7 @@ deepCopy
 解决：函数、对象、数组、正则、日期、循环依赖等的深拷贝
 
 ```js
-import { deepCopy } from 'tools'
+import { deepCopy } from 'js-tools-function'
 const newObject = deepCopy({
   name: 1,
   show: () => {
@@ -156,4 +156,38 @@ const newObject = deepCopy({
 })
 ```
 
+### 拦截器
+
+支持请求拦截器，解析响应前拦截、解析后拦截，统一请求头配置
+
+地址栏参数支持第二参数{params}传递
+
+```js
+import { zwFetch } from 'js-tools-function'
+zwFetch.interceptor.options.headers['zzzz'] = 'qaq' // 配置统一请求头
+// 请求拦截器
+zwFetch.interceptor.request.use(options => {
+  // 全局请求加上时间戳
+  const t = Date.now()
+  options.params.t = t
+  return options
+})
+// 解析响应前拦截
+zwFetch.interceptor.response.noTransform.use(res => {
+  const { status } = res
+  if (status === 401 || status === 403) {
+    return console.log('重新登陆')
+  } else if (status === 404) {
+    return console.log('没有找到')
+  }
+  return res
+})
+// 解析响应前拦截
+zwFetch.interceptor.response.transform.use(res => {
+  const { data } = res
+  return data
+})
+// 挂载在window上面
+window.fetch = zwFetch
+```
 
