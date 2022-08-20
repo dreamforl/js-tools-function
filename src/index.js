@@ -7,12 +7,9 @@
  *  time:触发的时间间隙
  * @return undefined
  */
-import ToexportExcel from './exportExcel'
-import toDeepCopy from './deepCopy'
-import toZwFetch from './fetch'
-export const deepCopy = toDeepCopy
-export const exportExcel = ToexportExcel
-export const zwFetch = toZwFetch
+export * from './exportExcel'
+export * from './deepCopy'
+export * from './fetch'
 export function throttleAtonce(fn, time) {
   let previous = 0
   return function () {

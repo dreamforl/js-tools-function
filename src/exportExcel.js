@@ -21,7 +21,7 @@
  * @Description  //自定义导出excel表格
  * @return { Object }
  */
-export default function exportExcel (options) {
+export function exportExcel(options) {
   let { header, data, name, deep } = options
   let container = document.createElement('div')
   let table = document.createElement('table')
@@ -140,7 +140,7 @@ export default function exportExcel (options) {
   let a = document.createElement('a')
   a.setAttribute('target', '_blank')
   //没有后缀就添加后缀.xlsx
-  if (!(/(\.xlsx$)|(\.xls$)/.test(name))) {
+  if (!/(\.xlsx$)|(\.xls$)/.test(name)) {
     name = name + '.xlsx'
   }
   a.setAttribute('download', name)

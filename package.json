@@ -12,7 +12,8 @@
     "rollup": "^2.58.0"
   },
   "scripts": {
-    "dev": "rollup -wc"
+    "dev": "rollup -wc",
+    "build": "rollup --config"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",

@@ -53,7 +53,13 @@ function getUrl(url, options) {
   return url
 }
 const originalFetch = window.fetch
-export default function zwFetch(url, options = {}) {
+
+/**
+ * @description 可以配置拦截器的fetch
+ * @param 与原生一致，不过第二参数支持params给url拼接参数
+ * @return Promise<T>
+ */
+export function zwFetch(url, options = {}) {
   options = { ...interceptor.options, ...options }
   requestCallback.forEach(item => {
     options = item(options)

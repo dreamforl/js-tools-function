@@ -1,5 +1,10 @@
 import { getType } from './index'
-export default function deepCopy(obj) {
+/**
+ * @description 深拷贝：支持对象、数组、日期、正则
+ * @param <T>
+ * @return <T>
+ */
+export function deepCopy(obj) {
   if (typeof obj !== 'object') {
     return obj
   }
@@ -54,4 +59,3 @@ function copyObject(obj, map, insideCopy) {
   })
   return result
 }
-
