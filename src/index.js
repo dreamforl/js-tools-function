@@ -1,4 +1,6 @@
-// 节流：单位时间内，只会执行一次函数
+export * from './exportExcel'
+export * from './deepCopy'
+export * from './fetch'
 /**
  * @function_name throttleAtonce
  * @description //函数节流-立即执行版，触发的时候会立即执行一次,后续持续点击只会在单位时间内被点击触发一次
@@ -7,9 +9,7 @@
  *  time:触发的时间间隙
  * @return undefined
  */
-export * from './exportExcel'
-export * from './deepCopy'
-export * from './fetch'
+
 export function throttleAtonce(fn, time) {
   let previous = 0
   return function () {
