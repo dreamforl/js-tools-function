@@ -1,23 +1,24 @@
-const requestCallback = [] // 请求的拦截器列表
-const requestErrorCallback = []
+import { FetchOptions } from './types/fetch'
+const requestCallback: Array<Function> = [] // 请求的拦截器列表
+const requestErrorCallback: Array<Function> = []
 
-const responseCallback = [] // 响应拦截器列表
-const responseErrorCallback = []
+const responseCallback: Array<Function> = [] // 响应拦截器列表
+const responseErrorCallback: Array<Function> = []
 
-const responseParseCallback = [] // 解析响应拦截器列表
-const responseParseErrorCallback = []
+const responseParseCallback: Array<Function> = [] // 解析响应拦截器列表
+const responseParseErrorCallback: Array<Function> = []
 // 所有拦截器都需要返回拦截之后的内容
-const interceptor = {
+const interceptor: FetchOptions = {
   options: {
     headers: {},
-    credentials: 'include', // 跨域请求中携带cookie
+    withCredentials: true, // 跨域请求中携带cookie
     responseType: 'json',
     method: 'GET',
     params: {},
   },
   // 添加请求拦截器
   request: {
-    use(callback, errorCallback) {
+    use(callback: Function, errorCallback: Function) {
       callback instanceof Function && requestCallback.push(callback)
       errorCallback instanceof Function && requestErrorCallback.push(errorCallback)
     },
@@ -25,14 +26,14 @@ const interceptor = {
   response: {
     // 添加响应拦截器（未解析）
     noTransform: {
-      use(callback, errorCallback) {
+      use(callback: Function, errorCallback: Function) {
         callback instanceof Function && responseCallback.push(callback)
         errorCallback instanceof Function && responseErrorCallback.push(errorCallback)
       },
     },
     // 添加响应拦截器（已解析）
     transform: {
-      use(callback, errorCallback) {
+      use(callback: Function, errorCallback: Function) {
         callback instanceof Function && responseParseCallback.push(callback)
         errorCallback instanceof Function && responseParseErrorCallback.push(errorCallback)
       },
@@ -40,8 +41,8 @@ const interceptor = {
   },
 }
 // 处理请求中的地址（将参数拼接进去），支持fetch第二个请求中传递{params}
-function getUrl(url, options) {
-  const { params } = options
+function getUrl(url: string, options: FetchOptions = {}) {
+  const { params = {} } = options
   const paramsStr = Object.entries(params).reduce((pre, item) => {
     return `${pre}&${item[0]}=${item[1]}`
   }, '')
@@ -59,7 +60,7 @@ const originalFetch = window.fetch
  * @param 与原生一致，不过第二参数支持params给url拼接参数
  * @return Promise<T>
  */
-export function zwFetch(url, options = {}) {
+export function zwFetch(url, options: FetchOptions = {}) {
   options = { ...interceptor.options, ...options }
   requestCallback.forEach(item => {
     options = item(options)
@@ -71,7 +72,7 @@ export function zwFetch(url, options = {}) {
         responseCallback.forEach(item => {
           res = item(res)
         })
-        const { responseType } = options
+        const { responseType = 'json' } = options
         res[responseType]().then(data => {
           responseParseCallback.forEach(item => {
             data = item(data)

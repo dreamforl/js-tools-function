@@ -1,4 +1,4 @@
-#个人私用 方法
+# 个人私用 方法
 
 # yarn安装
 
@@ -60,15 +60,6 @@ tools.base64ToBlob(base64)
 
 ```javascript
 tools.copyToBoard(str)
-```
-
-### canvas图片灰度
-
-可以将彩色图片转化为灰色图片
-传入canvas元素，或者是canvas元素的选择器
-
-```javascript
-tools.pictureGray(el)
 ```
 
 ### 返回参数的类型字符串（小写）

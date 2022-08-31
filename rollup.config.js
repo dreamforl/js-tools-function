@@ -1,32 +1,49 @@
-import {
-  terser
-} from 'rollup-plugin-terser'
+import { terser } from 'rollup-plugin-terser'
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
+import ts from 'rollup-plugin-typescript2'
+import path from 'path'
+import { version } from './package.json'
+const banner =
+  '/*!\n' +
+  ` * Vue.js v${version}\n` +
+  ` * (c) 2021-${new Date().getFullYear()} zhenwei\n` +
+  ' * Released under the MIT License.\n' +
+  ' */'
 export default {
-  input: 'src/index.js',
+  input: 'src/index.ts',
   output: {
     file: 'dist/index.js',
     format: 'umd',
-    name: 'tools'
+    name: 'tools',
+    banner,
   },
   plugins: [
-    babel({
-      exclude: 'node_modules/**', //排除node_modules
+    ts({
+      tsconfig: path.resolve(__dirname, 'tsconfig.json'),
+      tsconfigOverride: {
+        compilerOptions: {
+          target: 'es5',
+        },
+        exclude: ['node_modules'],
+      },
     }),
-    terser({ //压缩代码
+    // babel({
+    //   exclude: 'node_modules/**', //排除node_modules
+    // }),
+    terser({
+      //压缩代码
       compress: {
         // drop_console: true //关闭console
-      }
+      },
     }),
     commonjs(),
     serve({
       contentBase: './dist', //服务器启动的文件夹，默认是项目根目录，需要在该文件下创建index.html
-      port: 8020 //端口号，默认10001
+      port: 8020, //端口号，默认10001
     }),
-    livereload('dist') //watch dist目录，当目录中的文件发生变化时，刷新页面
+    livereload('dist'), //watch dist目录，当目录中的文件发生变化时，刷新页面
   ],
-
 }

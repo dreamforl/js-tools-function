@@ -1,3 +1,4 @@
+import { Options, Child } from './types/exportExcel'
 /* eslint-disable */
 /**
  * @functionName exportExcel
@@ -21,7 +22,7 @@
  * @Description  //自定义导出excel表格
  * @return { Object }
  */
-export function exportExcel(options) {
+export function exportExcel(options: Options) {
   let { header, data, name, deep } = options
   let container = document.createElement('div')
   let table = document.createElement('table')
@@ -43,7 +44,7 @@ export function exportExcel(options) {
         // 设置上级表头
         let td_father = document.createElement('td')
         td_father.innerText = item.label
-        td_father.setAttribute('colspan', item.colspan)
+        td_father.setAttribute('colspan', item.colspan.toString())
         tr1.appendChild(td_father)
         // 设置二级表头
         item.children.forEach(item_child => {
@@ -66,8 +67,8 @@ export function exportExcel(options) {
         } else {
           td.style.width = '100px'
         }
-        td.setAttribute('colspan', 1)
-        td.setAttribute('rowspan', item.rowspan)
+        td.setAttribute('colspan', '1')
+        td.setAttribute('rowspan', item.rowspan.toString(0))
         td.innerText = item.label
         tr1.appendChild(td)
       }
@@ -90,9 +91,9 @@ export function exportExcel(options) {
     table.appendChild(thead)
   }
   // 由于可能存在多级表头，故需要对header中的key提取出来成为数组。然后后续直接从数组中获取值
-  let key_list = []
+  let key_list: Array<Child> = []
   header.forEach(item => {
-    if (item.children) {
+    if (item.children instanceof Array) {
       item.children.forEach(item_child => {
         key_list.push(item_child)
       })
