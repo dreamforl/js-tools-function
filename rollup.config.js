@@ -8,7 +8,7 @@ import path from 'path'
 import { version } from './package.json'
 const banner =
   '/*!\n' +
-  ` * Vue.js v${version}\n` +
+  ` * tools v${version}\n` +
   ` * (c) 2021-${new Date().getFullYear()} zhenwei\n` +
   ' * Released under the MIT License.\n' +
   ' */'
