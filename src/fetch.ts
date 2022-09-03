@@ -1,4 +1,5 @@
 import { FetchOptions } from './types/fetch'
+import { deepCopy } from 'src/deepCopy'
 type CallbackFun = (obj: any) => any
 const requestCallback: Array<CallbackFun> = [] // 请求的拦截器列表
 const requestErrorCallback: Array<CallbackFun> = []
@@ -61,11 +62,12 @@ const originalFetch = window.fetch
  * @param 与原生一致，不过第二参数支持params给url拼接参数
  * @return Promise<T>
  */
-export function zwFetch(url, options: FetchOptions = {}) {
-  options = { ...interceptor.options, ...options }
+export function zwFetch(url, params: FetchOptions = {}) {
+  let options = deepCopy({ ...interceptor.options, ...params }) as FetchOptions
   requestCallback.forEach(item => {
     options = item(options)
   })
+  options.body = params.body
   return new Promise(resolve => {
     url = getUrl(url, options)
     originalFetch(url, options)

@@ -22,6 +22,7 @@
     "types": ["node"],
     "paths": {
       "types/*": ["src/types/*"],
+      "src/*": ["src/*"],
     }
   },
   "include": ["src", "packages/*/src"]
