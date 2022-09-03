@@ -2,6 +2,22 @@ import { getType } from './index'
 interface CopyObject {
   [params: string]: any
 }
+// 复制对象类型
+function copyObject(obj: CopyObject, map, insideCopy): unknown {
+  const result = {}
+  Object.keys(obj).forEach(item => {
+    result[item] = insideCopy(obj[item], map)
+  })
+  return result
+}
+// 复制数组类型
+function copyList(list, map, insideCopy) {
+  const result: Array<any> = []
+  list.forEach(item => {
+    result.push(insideCopy(item, map))
+  })
+  return result
+}
 function insideCopy(obj: unknown, map): unknown {
   if (typeof obj !== 'object') {
     return obj
@@ -16,7 +32,7 @@ function insideCopy(obj: unknown, map): unknown {
   switch (type) {
     // 是数组，就走数组的拷贝
     case 'array': {
-      return copyList(obj, map)
+      return copyList(obj, map, insideCopy)
     }
     // 正则直接复制
     case 'regexp': {
@@ -28,10 +44,11 @@ function insideCopy(obj: unknown, map): unknown {
     }
     default: {
       // 最后走对象的拷贝
-      return copyObject(obj as CopyObject, map)
+      return copyObject(obj as CopyObject, map, insideCopy)
     }
   }
 }
+
 /**
  * 深拷贝：支持对象、数组、日期、正则
  */
@@ -41,22 +58,4 @@ export function deepCopy(obj: unknown): unknown {
   }
   const map = new WeakMap()
   return insideCopy(obj, map)
-}
-
-// 复制数组类型
-function copyList(list, map) {
-  const result: Array<any> = []
-  list.forEach(item => {
-    result.push(insideCopy(item, map))
-  })
-  return result
-}
-
-// 复制对象类型
-function copyObject(obj: CopyObject, map): unknown {
-  const result = {}
-  Object.keys(obj).forEach(item => {
-    result[item] = insideCopy(obj[item], map)
-  })
-  return result
 }

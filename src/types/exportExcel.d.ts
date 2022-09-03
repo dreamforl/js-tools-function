@@ -1,12 +1,10 @@
-export interface Options {
-  name: string
-  header: Array<HeaderOPtion>
-  data: Array<{
-    index: number
-  }>
-  deep: 2 | undefined
+export interface Child {
+  label: string
+  key: string
+  length: number
+  value?: string | number
 }
-interface HeaderOPtion {
+interface HeaderOption {
   label: string
   key: string
   length: number
@@ -15,9 +13,11 @@ interface HeaderOPtion {
   rowspan: 1 | 2
   colspan: number
 }
-export interface Child {
-  label: string
-  key: string
-  length: number
-  value?: string | number
+export interface Options {
+  name: string
+  header: Array<HeaderOption>
+  data: Array<{
+    index: number
+  }>
+  deep: 2 | undefined
 }

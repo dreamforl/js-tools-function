@@ -1,12 +1,13 @@
 import { FetchOptions } from './types/fetch'
-const requestCallback: Array<Function> = [] // 请求的拦截器列表
-const requestErrorCallback: Array<Function> = []
+type CallbackFun = (obj: any) => any
+const requestCallback: Array<CallbackFun> = [] // 请求的拦截器列表
+const requestErrorCallback: Array<CallbackFun> = []
 
-const responseCallback: Array<Function> = [] // 响应拦截器列表
-const responseErrorCallback: Array<Function> = []
+const responseCallback: Array<CallbackFun> = [] // 响应拦截器列表
+const responseErrorCallback: Array<CallbackFun> = []
 
-const responseParseCallback: Array<Function> = [] // 解析响应拦截器列表
-const responseParseErrorCallback: Array<Function> = []
+const responseParseCallback: Array<CallbackFun> = [] // 解析响应拦截器列表
+const responseParseErrorCallback: Array<CallbackFun> = []
 // 所有拦截器都需要返回拦截之后的内容
 const interceptor: FetchOptions = {
   options: {
@@ -18,7 +19,7 @@ const interceptor: FetchOptions = {
   },
   // 添加请求拦截器
   request: {
-    use(callback: Function, errorCallback: Function) {
+    use(callback: CallbackFun, errorCallback: CallbackFun) {
       callback instanceof Function && requestCallback.push(callback)
       errorCallback instanceof Function && requestErrorCallback.push(errorCallback)
     },
@@ -26,14 +27,14 @@ const interceptor: FetchOptions = {
   response: {
     // 添加响应拦截器（未解析）
     noTransform: {
-      use(callback: Function, errorCallback: Function) {
+      use(callback: CallbackFun, errorCallback: CallbackFun) {
         callback instanceof Function && responseCallback.push(callback)
         errorCallback instanceof Function && responseErrorCallback.push(errorCallback)
       },
     },
     // 添加响应拦截器（已解析）
     transform: {
-      use(callback: Function, errorCallback: Function) {
+      use(callback: CallbackFun, errorCallback: CallbackFun) {
         callback instanceof Function && responseParseCallback.push(callback)
         errorCallback instanceof Function && responseParseErrorCallback.push(errorCallback)
       },
@@ -65,7 +66,7 @@ export function zwFetch(url, options: FetchOptions = {}) {
   requestCallback.forEach(item => {
     options = item(options)
   })
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     url = getUrl(url, options)
     originalFetch(url, options)
       .then(res => {

@@ -6,7 +6,7 @@
  */
 export function strToBuffer(str) {
   const buf = new ArrayBuffer(str.length * 2) // 每个字符占用2个字节
-  let bufView = new Uint16Array(buf)
+  const bufView = new Uint16Array(buf)
   for (let i = 0, strLen = str.length; i < strLen; i++) {
     bufView[i] = str.charCodeAt(i)
   }
@@ -41,7 +41,7 @@ export function Uint8ArrayToString(fileData: Uint8Array): string {
  * 字符串转化为Uint8Array
  */
 export function stringToUint8Array(str: string): Uint8Array {
-  let arr: Array<number> = []
+  const arr: Array<number> = []
   for (let i = 0, j = str.length; i < j; ++i) {
     arr.push(str.charCodeAt(i))
   }

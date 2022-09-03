@@ -2,15 +2,15 @@ export * from './exportExcel'
 export * from './deepCopy'
 export * from './fetch'
 export * from './buffer'
-
+import { anyFun } from './types/public'
 /**
  * 函数节流-立即执行版，
  * 触发的时候会立即执行一次,后续持续点击只会在单位时间内被点击触发一次
  */
-export function throttleAtonce(fn: Function, time: number = 500): Function {
+export function throttleAtonce(fn: anyFun, time = 500): anyFun {
   let previous = 0
   return function () {
-    let now = Date.now()
+    const now = Date.now()
     if (now - previous > time) {
       fn.call(this)
       previous = now
@@ -22,7 +22,7 @@ export function throttleAtonce(fn: Function, time: number = 500): Function {
  * 函数节流---延迟执行版,第一次触发会生成定时器，到一定时间后执行函数
  * 持续点击也只会在单位时间内触发一次
  */
-export function throttleLatter(fn: Function, time: number = 500): Function {
+export function throttleLatter(fn: anyFun, time = 500): anyFun {
   let timeout
   return function () {
     if (!timeout) {
@@ -37,7 +37,7 @@ export function throttleLatter(fn: Function, time: number = 500): Function {
 /**
  * 事件触发过了一段时间之后才会执行，持续触发的话刷新计时器
  */
-export function debonce(func: Function, time: number = 500): Function {
+export function debonce(func: anyFun, time = 500): anyFun {
   let timeout
   return function () {
     if (timeout) {
@@ -53,7 +53,7 @@ export function debonce(func: Function, time: number = 500): Function {
  * 根据传入的字符串格式化事件，默认格式化获取当前时间
  * 形如YYYY-MM-DD hh-mm-ss
  */
-export function format(str: String = 'YYYY-MM-DD hh:mm:ss', time?: Date | number): String | any {
+export function format(str = 'YYYY-MM-DD hh:mm:ss', time?: Date | number): string | any {
   if (!time) {
     time = new Date()
   }
@@ -63,12 +63,12 @@ export function format(str: String = 'YYYY-MM-DD hh:mm:ss', time?: Date | number
   if (!(time instanceof Date)) {
     return time
   }
-  let year = time.getFullYear().toString()
-  let month = (time.getMonth() + 1).toString().padStart(2, '0')
-  let day = time.getDate().toString().padStart(2, '0')
-  let hour = time.getHours().toString().padStart(2, '0')
-  let minute = time.getMinutes().toString().padStart(2, '0')
-  let second = time.getSeconds().toString().padStart(2, '0')
+  const year = time.getFullYear().toString()
+  const month = (time.getMonth() + 1).toString().padStart(2, '0')
+  const day = time.getDate().toString().padStart(2, '0')
+  const hour = time.getHours().toString().padStart(2, '0')
+  const minute = time.getMinutes().toString().padStart(2, '0')
+  const second = time.getSeconds().toString().padStart(2, '0')
   str = str
     .replace('YYYY', year)
     .replace('MM', month)
@@ -88,9 +88,9 @@ interface base64Result {
 /**
  * base64转化为图片
  */
-export function base64ToBlob(base64: String): base64Result {
+export function base64ToBlob(base64: string): base64Result {
   try {
-    let arr = base64.split(',')
+    const arr = base64.split(',')
     if (arr.length < 2) {
       return {
         status: 'error',
@@ -104,10 +104,10 @@ export function base64ToBlob(base64: String): base64Result {
         message: '无法获取图片类型',
       }
     }
-    let mime = regResult[1]
-    let bstr = atob(arr[1])
+    const mime = regResult[1]
+    const bstr = atob(arr[1])
     let n = bstr.length
-    let u8arr = new Uint8Array(n)
+    const u8arr = new Uint8Array(n)
     while (n--) {
       u8arr[n] = bstr.charCodeAt(n)
     }
@@ -147,7 +147,7 @@ export function copyToBoard(value: string): void {
  * 返回参数的类型
  */
 export function getType(params: any): string {
-  let str = Object.prototype.toString.call(params).slice(8, -1).toLowerCase()
+  const str = Object.prototype.toString.call(params).slice(8, -1).toLowerCase()
   return str
 }
 
@@ -157,6 +157,6 @@ export function getType(params: any): string {
 interface sleepPromise {
   <T = number>(time: number): Promise<T>
 }
-export function sleep(time: number = 500): Promise<sleepPromise> {
+export function sleep(time = 500): Promise<sleepPromise> {
   return new Promise(resolve => setTimeout(resolve, time))
 }
