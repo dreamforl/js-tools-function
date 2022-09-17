@@ -7,23 +7,34 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
-
     "allowJs": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
-
     "noUnusedLocals": true,
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "removeComments": false,
-    "jsx": "preserve",
-    "lib": ["esnext", "dom"],
-    "types": ["node"],
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "types": [
+      "node"
+    ],
     "paths": {
-      "types/*": ["src/types/*"],
-      "src/*": ["src/*"],
-    }
+      "types/*": [
+        "src/types/*"
+      ],
+      "src/*": [
+        "src/*"
+      ],
+    },
+    "declarationDir": "dist/types",
+    "declaration": true
   },
-  "include": ["src", "packages/*/src"]
+  "include": [
+    "src",
+    "packages/*/src"
+  ]
 }

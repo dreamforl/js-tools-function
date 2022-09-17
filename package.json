@@ -4,7 +4,7 @@
   "main": "./dist/index.js",
   "license": "MIT",
   "description": "自定义函数库",
-  "typings": "types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "keywords": [
     "tools-function"
   ],
