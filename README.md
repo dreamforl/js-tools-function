@@ -151,8 +151,6 @@ const newObject = deepCopy({
 
 支持请求拦截器，解析响应前拦截、解析后拦截，统一请求头配置
 
-地址栏参数支持第二参数{params}传递
-
 ```js
 import { zwFetch } from 'js-tools-function'
 zwFetch.interceptor.options.headers['zzzz'] = 'qaq' // 配置统一请求头
@@ -180,5 +178,42 @@ zwFetch.interceptor.response.transform.use(res => {
 })
 // 挂载在window上面
 window.fetch = zwFetch
+```
+
+## string
+
+```js
+import { string } from 'js-tools-function'
+```
+
+### 转化为小驼峰
+
+将字母前面有-或者_的转化为大写字母
+
+```js
+string.camelCase(string);
+// eg
+string.camelCase('font-size')
+// fontSize
+```
+
+
+
+## dom
+
+``` js
+import { dom } from 'js-tools-function'
+```
+
+### 获取元素样式
+
+```js
+dom.getStyle(el,key) // key可以使用-和_会自动转化为小驼峰
+```
+
+### 设置元素样式
+
+```js
+dom.setStyle(el,key,value) // key可以使用-和_会自动转化为小驼峰
 ```
 
