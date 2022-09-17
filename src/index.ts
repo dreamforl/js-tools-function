@@ -2,7 +2,9 @@ export * from './exportExcel'
 export * from './deepCopy'
 export * from './fetch'
 export * from './buffer'
-import { anyFun } from './types/public'
+export * as dom from './dom'
+
+type anyFun = (...args) => any
 /**
  * 函数节流-立即执行版，
  * 触发的时候会立即执行一次,后续持续点击只会在单位时间内被点击触发一次
