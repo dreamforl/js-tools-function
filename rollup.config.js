@@ -28,6 +28,7 @@ export default {
         },
         exclude: ['node_modules'],
       },
+      // useTsconfigDeclarationDir: true, 设置d.ts文件的打包目录为tsconfig.json的目录
     }),
     // babel({
     //   exclude: 'node_modules/**', //排除node_modules
