@@ -15,7 +15,7 @@
   "scripts": {
     "dev": "npm run lint && rollup -wc",
     "build": "npm run lint && rollup --config",
-    "lint": "eslint src --ext .js,.ts --cache --fix && npx prettier --write src/*.ts"
+    "lint": "eslint src --ext .js,.ts --fix && npx prettier --write src/*.ts"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
