@@ -1,5 +1,5 @@
 import error from './error'
-import { camelCase } from 'src/global/string'
+import { camelCase } from './string'
 /**
  * 设置元素的样式
  */

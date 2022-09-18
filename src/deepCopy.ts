@@ -52,7 +52,7 @@ function insideCopy(obj: unknown, map): unknown {
 /**
  * 深拷贝：支持对象、数组、日期、正则
  */
-export function deepCopy(obj: unknown): unknown {
+export default function deepCopy(obj: unknown): unknown {
   if (typeof obj !== 'object') {
     return obj
   }
