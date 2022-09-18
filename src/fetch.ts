@@ -1,4 +1,5 @@
-import { deepCopy } from 'src/deepCopy'
+import deepCopy from './deepCopy'
+import error from './error'
 type Fun = (res: unknown) => unknown
 type Use = (callback: Fun, errorCallback: Fun) => void
 
@@ -102,3 +103,19 @@ export function zwFetch(url, params: FetchOptions = {}) {
   })
 }
 zwFetch.interceptor = interceptor
+
+/**
+ * 传入对象，解析为请求地址栏的参数的形式
+ * '?name=1&age=2'
+ * 并且参数会被编码 encodeURIComponent
+ */
+export function parseObject(object: Params): string {
+  if (typeof object !== 'object') {
+    error('parseObject first param needs object .likes { name : "张三" }')
+    return ''
+  }
+  const result = Object.entries(object).reduce((pre, item) => {
+    return `${pre}&${item[0]}=${encodeURIComponent(item[1])}`
+  }, '')
+  return `?${result.replace('&', '')}`
+}
