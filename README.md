@@ -217,3 +217,35 @@ dom.getStyle(el,key) // key可以使用-和_会自动转化为小驼峰
 dom.setStyle(el,key,value) // key可以使用-和_会自动转化为小驼峰
 ```
 
+## 请求
+
+### 对象转化为地址栏参数
+
+```js
+import { parseObject } from 'js-tools-function'
+parseObject({ name: '张三', age: 10 })
+// '?name=%E5%BC%A0%E4%B8%89&age=10'
+```
+
+## random
+
+```js
+import { random } from 'js-tools-function'
+```
+
+### 获取随机数
+
+```js
+random.getUuid() // 返回符合RFC4122 u4版本的uuid
+```
+
+### 获取给定长度的随机数
+
+```js
+random.getRandom(length = 10,list)
+// 默认从0~f中随机
+// 第二参数为数组，可以传递范围的数组，将会从数组中随机
+random.getRandom(5)
+// 3fac1
+```
+

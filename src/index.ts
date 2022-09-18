@@ -3,7 +3,8 @@ export * from './deepCopy'
 export * from './fetch'
 export * from './buffer'
 export * as dom from './dom'
-export * as string from './global/string'
+export * as string from './string'
+export * as random from './random'
 type anyFun = (...args) => any
 /**
  * 函数节流-立即执行版，
