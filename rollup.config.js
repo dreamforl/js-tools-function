@@ -1,9 +1,8 @@
 import { terser } from 'rollup-plugin-terser'
 import commonjs from 'rollup-plugin-commonjs'
-import serve from 'rollup-plugin-serve'
-import livereload from 'rollup-plugin-livereload'
 import ts from 'rollup-plugin-typescript2'
 import path from 'path'
+import babel from 'rollup-plugin-babel'
 import { version } from './package.json'
 const banner =
   '/*!\n' +
@@ -30,9 +29,9 @@ export default {
       },
       // useTsconfigDeclarationDir: true, 设置d.ts文件的打包目录为tsconfig.json的目录
     }),
-    // babel({
-    //   exclude: 'node_modules/**', //排除node_modules
-    // }),
+    babel({
+      exclude: 'node_modules/**', //排除node_modules
+    }),
     terser({
       //压缩代码
       compress: {
@@ -40,10 +39,5 @@ export default {
       },
     }),
     commonjs(),
-    serve({
-      contentBase: './dist', //服务器启动的文件夹，默认是项目根目录，需要在该文件下创建index.html
-      port: 8020, //端口号，默认10001
-    }),
-    livereload('dist'), //watch dist目录，当目录中的文件发生变化时，刷新页面
   ],
 }
