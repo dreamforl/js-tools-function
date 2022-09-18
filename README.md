@@ -15,10 +15,8 @@ npm install js-tools-function
 需要开启服务才可以使用
 
 ```javascript
-import tools from 'js-tools-function'
+import * as tools from 'js-tools-function'
 ```
-
-
 
 # 工具库
 
@@ -27,17 +25,20 @@ import tools from 'js-tools-function'
 ### 函数节流
 
 ```javascript
-tools.throttleAtonce(function,timeout)
+import { throttleAtonce } from 'js-tools-function'
+throttleAtonce(function, timeout)
 ```
 
 ```javascript
-tools.throttleLatter(function,timeout)
+import { throttleLatter } from 'js-tools-function'
+throttleLatter(function, timeout)
 ```
 
 ### 函数防抖
 
 ```javascript
-tools.debonce(function,timeout)
+import { debonce } from 'js-tools-function'
+debonce(fn, timeout)
 ```
 
 ### 格式化日期
@@ -47,30 +48,37 @@ tools.debonce(function,timeout)
 不传str默认样式为:  YYYY-MM-DD hh:mm:ss
 
 ```javascript
-tools.format(str,time)
+import { format } from 'js-tools-function'
+format(str,time)
+format()
+// 2022-09-19 02:06:57
 ```
 
 ### base64转png
 
 ```javascript
-tools.base64ToBlob(base64)
+import { base64ToBlob } from 'js-tools-function'
+base64ToBlob(base64)
 ```
 
-### 将制定内容复制到剪切板
+### 复制内容
 
 ```javascript
-tools.copyToBoard(str)
+import { copyToBoard } from 'js-tools-function'
+copyToBoard(str)
 ```
 
-### 返回参数的类型字符串（小写）
+### 返回类型
 
 ```javascript
-tools.type(any)
+import { type } from 'js-tools-function'
+type(any)
 ```
 
 ### 列表导出excel
 
 ```javascript
+import { exportExcel } from 'js-tools-function'
 //一级表头示例
 let options = {
     data:list,
@@ -81,7 +89,7 @@ let options = {
         {label:'性别',key:'sex'},
     ]
 }
-tools.exportExcel(options)
+exportExcel(options)
 ```
 
 ```javascript
@@ -119,21 +127,19 @@ let options = {
     },
   ],
 }
-tools.exportExcel(options)
+exportExcel(options)
 ```
 
 
 
 
-### 其他语言的sleep
-sleep
+### sleep函数
 ```javascript
+import { sleep } from 'js-tools-function'
 sleep(1000).then(()=>{console.log('过了100ms')})
 ```
 
 ### 深拷贝
-
-deepCopy
 
 解决：函数、对象、数组、正则、日期、循环依赖等的深拷贝
 
@@ -182,38 +188,31 @@ window.fetch = zwFetch
 
 ## string
 
-```js
-import { string } from 'js-tools-function'
-```
-
 ### 转化为小驼峰
 
 将字母前面有-或者_的转化为大写字母
 
 ```js
+import { string } from 'js-tools-function'
 string.camelCase(string);
 // eg
 string.camelCase('font-size')
 // fontSize
 ```
 
-
-
 ## dom
-
-``` js
-import { dom } from 'js-tools-function'
-```
 
 ### 获取元素样式
 
 ```js
+import { dom } from 'js-tools-function'
 dom.getStyle(el,key) // key可以使用-和_会自动转化为小驼峰
 ```
 
 ### 设置元素样式
 
 ```js
+import { dom } from 'js-tools-function'
 dom.setStyle(el,key,value) // key可以使用-和_会自动转化为小驼峰
 ```
 
@@ -229,19 +228,18 @@ parseObject({ name: '张三', age: 10 })
 
 ## random
 
-```js
-import { random } from 'js-tools-function'
-```
-
 ### 获取随机数
 
 ```js
+import { random } from 'js-tools-function'
 random.getUuid() // 返回符合RFC4122 u4版本的uuid
+// 4aa00c56-05db-4354-86ca-2ced34a877e7
 ```
 
 ### 获取给定长度的随机数
 
 ```js
+import { random } from 'js-tools-function'
 random.getRandom(length = 10,list)
 // 默认从0~f中随机
 // 第二参数为数组，可以传递范围的数组，将会从数组中随机
