@@ -69,6 +69,21 @@ const interceptor: Interceptor = {
 }
 
 const originalFetch = window.fetch
+/**
+ * 传入对象，解析为请求地址栏的参数的形式
+ * '?name=1&age=2'
+ * 并且参数会被编码 encodeURIComponent
+ */
+export function parseObject(object: Params, noQuestionMark = false): string {
+  if (typeof object !== 'object') {
+    error('parseObject first param needs object .likes { name : "张三" }')
+    return ''
+  }
+  const result = Object.entries(object).reduce((pre, item) => {
+    return `${pre}&${item[0]}=${encodeURIComponent(item[1])}`
+  }, '')
+  return `${noQuestionMark ? '&' : '?'}${result.replace('&', '')}`
+}
 
 /**
  * @description 可以配置拦截器的fetch
@@ -76,11 +91,16 @@ const originalFetch = window.fetch
  * @return Promise<T>
  */
 export function zwFetch(url, params: FetchOptions = {}) {
+  if (/\?/.test(url)) {
+    url = url + parseObject(interceptor.options.params as Params, true)
+  } else {
+    url = url + parseObject(interceptor.options.params as Params)
+  }
   let options = deepCopy({ ...interceptor.options, ...params }) as FetchOptions
   requestCallback.forEach(item => {
     options = item(options)
   })
-  options.body = params.bodyf
+  options.body = params.body
   return new Promise(resolve => {
     originalFetch(url, options)
       .then(res => {
@@ -103,19 +123,3 @@ export function zwFetch(url, params: FetchOptions = {}) {
   })
 }
 zwFetch.interceptor = interceptor
-
-/**
- * 传入对象，解析为请求地址栏的参数的形式
- * '?name=1&age=2'
- * 并且参数会被编码 encodeURIComponent
- */
-export function parseObject(object: Params): string {
-  if (typeof object !== 'object') {
-    error('parseObject first param needs object .likes { name : "张三" }')
-    return ''
-  }
-  const result = Object.entries(object).reduce((pre, item) => {
-    return `${pre}&${item[0]}=${encodeURIComponent(item[1])}`
-  }, '')
-  return `?${result.replace('&', '')}`
-}
