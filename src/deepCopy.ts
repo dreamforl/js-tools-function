@@ -1,4 +1,3 @@
-import { getType } from './index'
 interface CopyObject {
   [params: string]: any
 }
@@ -19,7 +18,8 @@ function copyList(list, map, insideCopy) {
   return result
 }
 function insideCopy(obj: unknown, map): unknown {
-  if (typeof obj !== 'object') {
+  const typeOfObject = typeof obj
+  if (typeOfObject !== 'object' || obj === null) {
     return obj
   }
   // 避免循环依赖
@@ -28,23 +28,20 @@ function insideCopy(obj: unknown, map): unknown {
   } else {
     map.set(obj)
   }
-  const type = getType(obj)
+
+  const type = Object.prototype.toString.call(obj).slice(8, -1)
   switch (type) {
     // 是数组，就走数组的拷贝
-    case 'array': {
+    case 'Array': {
       return copyList(obj, map, insideCopy)
     }
-    // 正则直接复制
-    case 'regexp': {
-      return obj
-    }
     // 日期使用新日期
-    case 'date': {
-      return new Date(obj as Date)
+    case 'Object': {
+      return copyObject(obj as CopyObject, map, insideCopy)
     }
     default: {
       // 最后走对象的拷贝
-      return copyObject(obj as CopyObject, map, insideCopy)
+      return obj
     }
   }
 }
@@ -52,7 +49,7 @@ function insideCopy(obj: unknown, map): unknown {
 /**
  * 深拷贝：支持对象、数组、日期、正则
  */
-export default function deepCopy(obj: unknown): unknown {
+export function deepCopy(obj: unknown): unknown {
   if (typeof obj !== 'object') {
     return obj
   }
