@@ -1,4 +1,4 @@
-import deepCopy from './deepCopy'
+import { deepCopy } from './deepCopy'
 import error from './error'
 type Fun = (res: unknown) => unknown
 type Use = (callback: Fun, errorCallback: Fun) => void
@@ -100,20 +100,23 @@ export function zwFetch(url, params: FetchOptions = {}) {
   requestCallback.forEach(item => {
     options = item(options)
   })
-  options.body = params.body
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     originalFetch(url, options)
       .then(res => {
         responseCallback.forEach(item => {
           res = item(res)
         })
-        const { responseType = 'json' } = options
-        res[responseType]().then(data => {
-          responseParseCallback.forEach(item => {
-            data = item(data)
+        if (/^2\d\d$/.test(res.status as unknown as string)) {
+          const { responseType } = options
+          res[responseType as string]().then(data => {
+            responseParseCallback.forEach(item => {
+              data = item(data)
+            })
+            resolve(data)
           })
-          resolve(data)
-        })
+        } else {
+          reject(res)
+        }
       })
       .catch(e => {
         responseErrorCallback.forEach(item => {
