@@ -7,14 +7,12 @@ yarn add js-tools-function
 
 npm install js-tools-function
 
-
-
 # 使用
 
-需要开启服务才可以使用
-
 ```javascript
-import * as tools from 'js-tools-function'
+import * as tools from 'js-tools-function' // 全量导出
+// 建议按需导入
+import { debonce } from 'js-tools-function' // 按需导入
 ```
 
 # 工具库
@@ -63,15 +61,16 @@ base64ToBlob(base64)
 ### 复制内容
 
 ```javascript
-import { copyToBoard } from 'js-tools-function'
-copyToBoard(str)
+import { copy } from 'js-tools-function'
+copy(str,()=>{ console.log('复制成功') })
 ```
 
 ### 返回类型
 
 ```javascript
-import { type } from 'js-tools-function'
-type(any)
+import { getType } from 'js-tools-function'
+getType('1')
+// number
 ```
 
 ### 列表导出excel
