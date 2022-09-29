@@ -129,21 +129,41 @@ export function base64ToBlob(base64: string): base64Result {
   }
 }
 
-/**
- * 赋值内容到剪切板
- */
-export function copyToBoard(value: string): void {
+// 降级的复制
+function defaultCopy(value: string, callback: any): void {
   const element = document.createElement('textarea')
+  element.style.opacity = '0'
+  element.style.position = 'fixed'
   document.body.appendChild(element)
   element.value = value
   element.select()
-  if (document.execCommand('copy')) {
-    document.execCommand('copy')
-    document.body.removeChild(element)
-    return
-  }
+  document.execCommand('copy')
   document.body.removeChild(element)
   return
+}
+/**
+ * 赋值内容到剪切板,可以接受第二参数为复制成功的回调
+ * 会先调用navigator.clipboard.writeText复制
+ * 不存在就降级为document.execCommand('copy')
+ * 需要用户操作之后才会复制成功
+ */
+export function copy(value: string, callback: any): void {
+  const { clipboard } = window.navigator
+  if (clipboard instanceof Object && typeof clipboard.writeText === 'function') {
+    clipboard
+      .writeText(value)
+      .then(() => {
+        return typeof callback === 'function' && callback()
+      })
+      .catch(e => {
+        if (e.name === 'NotAllowedError') {
+          return console.warn('需要点击之类的操作才可以触发')
+        }
+        return defaultCopy(value, callback)
+      })
+  } else {
+    return defaultCopy(value, callback)
+  }
 }
 
 /**
