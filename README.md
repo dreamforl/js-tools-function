@@ -38,19 +38,6 @@ import { debonce } from 'js-tools-function'
 debonce(fn, timeout)
 ```
 
-### 格式化日期
-
-根据所传的格式日期的字段，来格式化日期，不传time默认返回当前时间
-
-不传str默认样式为:  YYYY-MM-DD hh:mm:ss
-
-```javascript
-import { format } from 'js-tools-function'
-format(str,time)
-format()
-// 2022-09-19 02:06:57
-```
-
 ### base64转png
 
 ```javascript
@@ -59,6 +46,8 @@ base64ToBlob(base64)
 ```
 
 ### 复制内容
+
+第一个参数为要复制的内容，第二参数为回调函数
 
 ```javascript
 import { copy } from 'js-tools-function'
@@ -243,5 +232,41 @@ random.getRandom(length = 10,list)
 // 第二参数为数组，可以传递范围的数组，将会从数组中随机
 random.getRandom(5)
 // 3fac1
+```
+
+## 时间
+
+### 格式化时间
+
+根据所传的格式日期的字段，来格式化日期，不传time默认返回当前时间
+
+不传str默认样式为:  YYYY-MM-DD hh:mm:ss
+
+```js
+import { time } from 'js-tools-function'
+time.format(str,time)
+// 2022-09-19 02:06:57
+```
+
+### 计算一个毫秒的时间
+
+对应的天、时、分、秒
+
+```js
+import { time } from 'js-tools-function'
+time.getTime(99999999)
+// {day: 1, hours: 3, minutes: 46, seconds: 39}
+```
+
+### 计算两个日期相差的时间
+
+第一个参数可以是时间戳，也可以是日期对象
+
+第二个参数默认为当前时间，可以传递时间戳和日期对象
+
+```js
+import { time } from 'js-tools-function'
+time.diffTwoTimes(new Date('2022-9-1'))
+// {day: 30, hours: 20, minutes: 8, seconds: 26}
 ```
 

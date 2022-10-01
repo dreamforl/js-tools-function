@@ -5,6 +5,7 @@ export * from './buffer'
 export * as dom from './dom'
 export * as string from './string'
 export * as random from './random'
+export * as time from './time'
 type anyFun = (...args) => any
 /**
  * 函数节流-立即执行版，
@@ -50,36 +51,6 @@ export function debonce(func: anyFun, time = 500): anyFun {
       func.call(this)
     }, time)
   }
-}
-
-/**
- * 根据传入的字符串格式化事件，默认格式化获取当前时间
- * 形如YYYY-MM-DD hh-mm-ss
- */
-export function format(str = 'YYYY-MM-DD hh:mm:ss', time?: Date | number): string | any {
-  if (!time) {
-    time = new Date()
-  }
-  if (typeof time === 'number') {
-    time = new Date(time)
-  }
-  if (!(time instanceof Date)) {
-    return time
-  }
-  const year = time.getFullYear().toString()
-  const month = (time.getMonth() + 1).toString().padStart(2, '0')
-  const day = time.getDate().toString().padStart(2, '0')
-  const hour = time.getHours().toString().padStart(2, '0')
-  const minute = time.getMinutes().toString().padStart(2, '0')
-  const second = time.getSeconds().toString().padStart(2, '0')
-  str = str
-    .replace('YYYY', year)
-    .replace('MM', month)
-    .replace('DD', day)
-    .replace('hh', hour)
-    .replace('mm', minute)
-    .replace('ss', second)
-  return str
 }
 
 interface base64Result {
@@ -134,12 +105,16 @@ function defaultCopy(value: string, callback: any): void {
   const element = document.createElement('textarea')
   element.style.opacity = '0'
   element.style.position = 'fixed'
+  element.style.zIndex = '0'
   document.body.appendChild(element)
   element.value = value
   element.select()
+  if (typeof document.execCommand !== 'function') {
+    return
+  }
   document.execCommand('copy')
   document.body.removeChild(element)
-  return
+  return typeof callback === 'function' && callback()
 }
 /**
  * 赋值内容到剪切板,可以接受第二参数为复制成功的回调
