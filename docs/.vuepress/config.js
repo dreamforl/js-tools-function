@@ -1,6 +1,7 @@
 import { defaultTheme } from 'vuepress'
 import { searchPlugin } from '@vuepress/plugin-search'
 export default {
+  base: '/dreamforl/',
   date: 'yyyy-MM-dd',
   lang: 'zh-CN',
   title: 'js-tools-function',
