@@ -6,6 +6,7 @@ export * as dom from './dom'
 export * as string from './string'
 export * as random from './random'
 export * as time from './time'
+export * as math from './math'
 type anyFun = (...args) => any
 /**
  * 函数节流-立即执行版，
