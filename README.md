@@ -1,4 +1,4 @@
-**js-tools-function 0.1 已经发布 :tada: ！**
+**js-tools-function 0.1 已经发布 :tada: ！**[地址](https://dreamforl.github.io/js-tools-function/)
 
 ### 安装
 
@@ -67,60 +67,6 @@ getType('1')
 // number
 ```
 
-### 列表导出excel
-
-```javascript
-import { exportExcel } from 'js-tools-function'
-//一级表头示例
-let options = {
-    data:list,
-    name:'可以不带后缀，默认xlsx',
-    header:[
-        {label:'序号',key:'index'},  //label为表头名称，key为表的值，可以采用a.b.c的方式(a必须是list中对象的属性)
-        {label:'姓名',key:'name',length:100},  //可以设置宽度(number)，默认渲染为100px
-        {label:'性别',key:'sex'},
-    ]
-}
-exportExcel(options)
-```
-
-```javascript
-//二级表头示例
-let options = {
-  deep: 2, //二级表头要设置deep为2，并且设置rowspan
-  name: '分布表.xlsx',
-  data: list,
-  header: [
-    {
-      label: '序号',
-      key: 'index',
-    },
-    {
-      label: '分布数',
-      colspan: 3, 		//要设置colspan，表示下面有几个子表头
-      children: [		//子表头 
-        {
-          label: '小孩',
-          key: 'child',
-        },
-        {
-          label: '成人',
-          key: 'adult',
-        },
-        {
-          label: '老人',
-          key: 'old',
-        },
-      ],
-    },
-    {
-      label: '性别',
-      key: 'sex',
-    },
-  ],
-}
-exportExcel(options)
-```
 
 
 
@@ -159,7 +105,7 @@ get('name')
 remove('name')
 
 // 清空缓存
-clear()
+c
 ```
 
 
@@ -309,3 +255,58 @@ time.diffTwoTimes(new Date('2022-9-1'))
 // {day: 30, hours: 20, minutes: 8, seconds: 26}
 ```
 
+
+### 列表导出excel
+
+```javascript
+import { exportExcel } from 'js-tools-function'
+//一级表头示例
+let options = {
+    data:list,
+    name:'可以不带后缀，默认xlsx',
+    header:[
+        {label:'序号',key:'index'},  //label为表头名称，key为表的值，可以采用a.b.c的方式(a必须是list中对象的属性)
+        {label:'姓名',key:'name',length:100},  //可以设置宽度(number)，默认渲染为100px
+        {label:'性别',key:'sex'},
+    ]
+}
+exportExcel(options)
+```
+
+```javascript
+//二级表头示例
+let options = {
+  deep: 2, //二级表头要设置deep为2，并且设置rowspan
+  name: '分布表.xlsx',
+  data: list,
+  header: [
+    {
+      label: '序号',
+      key: 'index',
+    },
+    {
+      label: '分布数',
+      colspan: 3, 		//要设置colspan，表示下面有几个子表头
+      children: [		//子表头 
+        {
+          label: '小孩',
+          key: 'child',
+        },
+        {
+          label: '成人',
+          key: 'adult',
+        },
+        {
+          label: '老人',
+          key: 'old',
+        },
+      ],
+    },
+    {
+      label: '性别',
+      key: 'sex',
+    },
+  ],
+}
+exportExcel(options)
+```
