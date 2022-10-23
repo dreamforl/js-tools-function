@@ -1,34 +1,33 @@
+**js-tools-function 0.1 已经发布 :tada: ！**
 
-# yarn安装
+### 安装
 
+```shell
 yarn add js-tools-function
-
-# npm安装
-
 npm install js-tools-function
-
-# 使用
-
-```javascript
-import * as tools from 'js-tools-function' // 全量导出
-// 建议按需导入
-import { debonce } from 'js-tools-function' // 按需导入
 ```
 
-# 工具库
+### 导入
 
-将用到的方法存起来备用
+```javascript
+// 全量导出
+import * as tools from 'js-tools-function' 
+// 按需导入
+import { debonce } from 'js-tools-function' 
+```
+
+## 函数
 
 ### 函数节流
 
 ```javascript
 import { throttleAtonce } from 'js-tools-function'
-throttleAtonce(function, timeout)
+throttleAtonce(fn, timeout)
 ```
 
 ```javascript
 import { throttleLatter } from 'js-tools-function'
-throttleLatter(function, timeout)
+throttleLatter(fn, timeout)
 ```
 
 ### 函数防抖
@@ -36,6 +35,12 @@ throttleLatter(function, timeout)
 ```javascript
 import { debonce } from 'js-tools-function'
 debonce(fn, timeout)
+```
+
+### sleep函数
+```javascript
+import { sleep } from 'js-tools-function'
+sleep(1000).then(()=>{console.log('过了100ms')})
 ```
 
 ### base64转png
@@ -120,11 +125,7 @@ exportExcel(options)
 
 
 
-### sleep函数
-```javascript
-import { sleep } from 'js-tools-function'
-sleep(1000).then(()=>{console.log('过了100ms')})
-```
+
 
 ### 深拷贝
 
@@ -138,6 +139,84 @@ const newObject = deepCopy({
     console.log(1)
   },
 })
+```
+
+## 缓存
+
+本地可以设置缓存时间 ,过期就返回undefined
+
+```js
+import cache from 'js-tools-function'
+const { get, set, remove, clear } = cache
+
+// 设置过期时间为10s
+set('name','张三',10*1000)
+
+// 读取
+get('name')
+
+// 移除某个值
+remove('name')
+
+// 清空缓存
+clear()
+```
+
+
+
+## 字符串
+
+### 转化为小驼峰
+
+将字母前面有-或者_的转化为大写字母
+
+```js
+import { string } from 'js-tools-function'
+string.camelCase(string);
+// eg
+string.camelCase('font-size')
+// fontSize
+```
+
+## DOM
+
+### 获取元素样式
+
+```js
+import { dom } from 'js-tools-function'
+dom.getStyle(el,key) // key可以使用-和_会自动转化为小驼峰
+```
+
+### 设置元素样式
+
+```js
+import { dom } from 'js-tools-function'
+dom.setStyle(el,key,value) // key可以使用-和_会自动转化为小驼峰
+```
+
+## Math
+
+```js
+import { math } from 'js-tools-function'
+```
+
+**四舍五入**
+
+```js
+// 取整的四舍五入
+math.rounding(1.1) // 1
+```
+
+
+
+## 请求
+
+### 对象转化为地址栏参数
+
+```js
+import { parseObject } from 'js-tools-function'
+parseObject({ name: '张三', age: 10 })
+// '?name=%E5%BC%A0%E4%B8%89&age=10'
 ```
 
 ### 拦截器
@@ -173,64 +252,7 @@ zwFetch.interceptor.response.transform.use(res => {
 window.fetch = zwFetch
 ```
 
-## string
-
-### 转化为小驼峰
-
-将字母前面有-或者_的转化为大写字母
-
-```js
-import { string } from 'js-tools-function'
-string.camelCase(string);
-// eg
-string.camelCase('font-size')
-// fontSize
-```
-
-## dom
-
-### 获取元素样式
-
-```js
-import { dom } from 'js-tools-function'
-dom.getStyle(el,key) // key可以使用-和_会自动转化为小驼峰
-```
-
-### 设置元素样式
-
-```js
-import { dom } from 'js-tools-function'
-dom.setStyle(el,key,value) // key可以使用-和_会自动转化为小驼峰
-```
-
-## math
-
-```js
-import { math } from 'js-tools-function'
-```
-
-**四舍五入**
-
-```js
-// 取整的四舍五入
-math.rounding(1.1) // 1
-```
-
-
-
-
-
-## 请求
-
-### 对象转化为地址栏参数
-
-```js
-import { parseObject } from 'js-tools-function'
-parseObject({ name: '张三', age: 10 })
-// '?name=%E5%BC%A0%E4%B8%89&age=10'
-```
-
-## random
+## 随机
 
 ### 获取随机数
 

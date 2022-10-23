@@ -2,15 +2,8 @@
 home: true
 tagline: 工具函数库
 features:
-- title: 简洁至上
-  details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
-- title: Vue驱动
-  details: 享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。
-- title: 高性能
-  details: VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。
 footer: MIT Licensed
 ---
-
 **js-tools-function 0.1 已经发布 :tada: ！**
 
 ### 安装
@@ -80,65 +73,6 @@ getType('1')
 // number
 ```
 
-### 列表导出excel
-
-```javascript
-import { exportExcel } from 'js-tools-function'
-//一级表头示例
-let options = {
-    data:list,
-    name:'可以不带后缀，默认xlsx',
-    header:[
-        {label:'序号',key:'index'},  //label为表头名称，key为表的值，可以采用a.b.c的方式(a必须是list中对象的属性)
-        {label:'姓名',key:'name',length:100},  //可以设置宽度(number)，默认渲染为100px
-        {label:'性别',key:'sex'},
-    ]
-}
-exportExcel(options)
-```
-
-```javascript
-//二级表头示例
-let options = {
-  deep: 2, //二级表头要设置deep为2，并且设置rowspan
-  name: '分布表.xlsx',
-  data: list,
-  header: [
-    {
-      label: '序号',
-      key: 'index',
-    },
-    {
-      label: '分布数',
-      colspan: 3, 		//要设置colspan，表示下面有几个子表头
-      children: [		//子表头 
-        {
-          label: '小孩',
-          key: 'child',
-        },
-        {
-          label: '成人',
-          key: 'adult',
-        },
-        {
-          label: '老人',
-          key: 'old',
-        },
-      ],
-    },
-    {
-      label: '性别',
-      key: 'sex',
-    },
-  ],
-}
-exportExcel(options)
-```
-
-
-
-
-
 
 ### 深拷贝
 
@@ -153,6 +87,29 @@ const newObject = deepCopy({
   },
 })
 ```
+
+## 缓存
+
+本地可以设置缓存时间 ,过期就返回undefined
+
+```js
+import cache from 'js-tools-function'
+const { get, set, remove, clear } = cache
+
+// 设置过期时间为10s
+set('name','张三',10*1000)
+
+// 读取
+get('name')
+
+// 移除某个值
+remove('name')
+
+// 清空缓存
+clear()
+```
+
+
 
 ## 字符串
 
@@ -299,3 +256,58 @@ time.diffTwoTimes(new Date('2022-9-1'))
 // {day: 30, hours: 20, minutes: 8, seconds: 26}
 ```
 
+
+### 列表导出excel
+
+```javascript
+import { exportExcel } from 'js-tools-function'
+//一级表头示例
+let options = {
+    data:list,
+    name:'可以不带后缀，默认xlsx',
+    header:[
+        {label:'序号',key:'index'},  //label为表头名称，key为表的值，可以采用a.b.c的方式(a必须是list中对象的属性)
+        {label:'姓名',key:'name',length:100},  //可以设置宽度(number)，默认渲染为100px
+        {label:'性别',key:'sex'},
+    ]
+}
+exportExcel(options)
+```
+
+```javascript
+//二级表头示例
+let options = {
+  deep: 2, //二级表头要设置deep为2，并且设置rowspan
+  name: '分布表.xlsx',
+  data: list,
+  header: [
+    {
+      label: '序号',
+      key: 'index',
+    },
+    {
+      label: '分布数',
+      colspan: 3, 		//要设置colspan，表示下面有几个子表头
+      children: [		//子表头 
+        {
+          label: '小孩',
+          key: 'child',
+        },
+        {
+          label: '成人',
+          key: 'adult',
+        },
+        {
+          label: '老人',
+          key: 'old',
+        },
+      ],
+    },
+    {
+      label: '性别',
+      key: 'sex',
+    },
+  ],
+}
+exportExcel(options)
+```
