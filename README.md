@@ -1,4 +1,10 @@
-**js-tools-function 0.1 已经发布 :tada: ！**[地址](https://dreamforl.github.io/js-tools-function/)
+# js-tools-function
+
+> 开发中使用到的函数
+
+包括类型判断、防抖节流、本地缓存（有有效时间）、json转化为地址栏参数、格式化时间、复制、深拷贝、获取设置DOM样式及生成RFC4122 u4版本的uuid等方法
+
+**js-tools-function 0.1.3 已经发布 :tada: ！**[地址](https://dreamforl.github.io/js-tools-function/)
 
 ### 安装
 
@@ -10,10 +16,9 @@ npm install js-tools-function
 ### 导入
 
 ```javascript
-// 全量导出
-import * as tools from 'js-tools-function' 
 // 按需导入
 import { debonce } from 'js-tools-function' 
+// 通过script标签引入，会引入全局变量tools
 ```
 
 ## 函数
@@ -68,11 +73,6 @@ getType('1')
 ```
 
 
-
-
-
-
-
 ### 深拷贝
 
 解决：函数、对象、数组、正则、日期、循环依赖等的深拷贝
@@ -105,7 +105,7 @@ get('name')
 remove('name')
 
 // 清空缓存
-c
+clear()
 ```
 
 

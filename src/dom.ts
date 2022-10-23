@@ -1,3 +1,4 @@
+import { isString } from './type'
 import error from './error'
 import { camelCase } from './string'
 /**
@@ -8,7 +9,7 @@ export function setStyle(el: HTMLElement, key: string, value: string | number): 
     error('setStyle first param needs HTMLElement')
     return
   }
-  if (typeof key !== 'string') {
+  if (!isString(key)) {
     error('setStyle second param needs string')
     return
   }
@@ -24,7 +25,7 @@ export function getStyle(el: HTMLElement, key: string): string | undefined {
     error('getStyle first param needs HTMLElement')
     return
   }
-  if (typeof key !== 'string') {
+  if (!isString(key)) {
     error('setStyle second param needs string')
     return
   }

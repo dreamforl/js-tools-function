@@ -1,3 +1,4 @@
+import { isObject } from './type'
 interface CopyObject {
   [params: string]: any
 }
@@ -18,8 +19,7 @@ function copyList(list, map, insideCopy) {
   return result
 }
 function insideCopy(obj: unknown, map): unknown {
-  const typeOfObject = typeof obj
-  if (typeOfObject !== 'object' || obj === null) {
+  if (!isObject(obj)) {
     return obj
   }
   // 避免循环依赖
@@ -50,7 +50,7 @@ function insideCopy(obj: unknown, map): unknown {
  * 深拷贝：支持对象、数组、日期、正则
  */
 export function deepCopy(obj: unknown): unknown {
-  if (typeof obj !== 'object') {
+  if (!isObject(obj)) {
     return obj
   }
   const map = new WeakMap()

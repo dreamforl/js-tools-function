@@ -1,3 +1,4 @@
+import { isNumber } from './type'
 type dateObject = {
   day: number
   hours: number
@@ -12,7 +13,7 @@ type dateObject = {
  */
 export function getTime(time: number): dateObject | undefined {
   // 不是数字 或者是NaN 或者 小于0
-  if (typeof time !== 'number' || time !== time || time < 0) {
+  if (!isNumber(time) || time < 0) {
     return
   }
   const day = Math.floor(time / (1000 * 60 * 60 * 24))
@@ -44,13 +45,13 @@ export function diffTwoTimes(
   if (Object.prototype.toString.call(time2 as Date) === '[object Date]') {
     time2 = (time2 as Date).getTime()
   }
-  if (typeof time1 !== 'number' || time1 !== time1 || time1 < 0) {
+  if (!isNumber(time1) || time1 < 0) {
     return
   }
-  if (typeof time2 !== 'number' || time2 !== time2 || time2 < 0) {
+  if (!isNumber(time2) || time2 < 0) {
     return
   }
-  return getTime(Math.abs(time1 - time2))
+  return getTime(Math.abs((time1 as number) - (time2 as number)))
 }
 
 /**
