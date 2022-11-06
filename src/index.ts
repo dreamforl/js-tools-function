@@ -8,6 +8,7 @@ export * as random from './random'
 export * as time from './time'
 export * as math from './math'
 export * as cache from './cache'
+export * as cookie from './cookie'
 type anyFun = (...args) => any
 /**
  * 函数节流-立即执行版，

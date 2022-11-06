@@ -1,5 +1,5 @@
 import { deepCopy } from './deepCopy'
-import error from './error'
+import { isObject } from './type'
 type Fun = (res: unknown) => unknown
 type Use = (callback: Fun, errorCallback: Fun) => void
 
@@ -69,21 +69,6 @@ const interceptor: Interceptor = {
 }
 
 const originalFetch = window.fetch
-/**
- * 传入对象，解析为请求地址栏的参数的形式
- * '?name=1&age=2'
- * 并且参数会被编码 encodeURIComponent
- */
-export function parseObject(object: Params, noQuestionMark = false): string {
-  if (typeof object !== 'object') {
-    error('parseObject first param needs object .likes { name : "张三" }')
-    return ''
-  }
-  const result = Object.entries(object).reduce((pre, item) => {
-    return `${pre}&${item[0]}=${encodeURIComponent(item[1])}`
-  }, '')
-  return `${noQuestionMark ? '&' : '?'}${result.replace('&', '')}`
-}
 
 /**
  * @description 可以配置拦截器的fetch
@@ -91,11 +76,15 @@ export function parseObject(object: Params, noQuestionMark = false): string {
  * @return Promise<T>
  */
 export function zwFetch(url, params: FetchOptions = {}) {
-  if (/\?/.test(url)) {
-    url = url + parseObject(interceptor.options.params as Params, true)
-  } else {
-    url = url + parseObject(interceptor.options.params as Params)
+  const urlObj = new URL(url)
+  const { origin, pathname, search } = urlObj
+  const searchParams = new URLSearchParams(search)
+  if (isObject(interceptor.options.params)) {
+    Object.entries(interceptor.options.params as Params).forEach(item => {
+      searchParams.set(item[0], item[1])
+    })
   }
+  url = origin + pathname + '?' + searchParams.toString()
   let options = deepCopy({ ...interceptor.options, ...params }) as FetchOptions
   requestCallback.forEach(item => {
     options = item(options)

@@ -12,12 +12,20 @@ const banner =
   ' */'
 export default {
   input: 'src/index.ts',
-  output: {
-    file: 'dist/index.js',
-    format: 'umd',
-    name: 'tools',
-    banner,
-  },
+  output: [
+    {
+      file: 'dist/index.umd.js',
+      format: 'umd',
+      name: 'tools',
+      banner,
+    },
+    {
+      file: 'dist/index.es.js',
+      format: 'es',
+      name: 'tools',
+      banner,
+    },
+  ],
   plugins: [
     ts({
       tsconfig: path.resolve(__dirname, 'tsconfig.json'),

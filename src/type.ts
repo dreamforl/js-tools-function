@@ -1,3 +1,4 @@
+// 数组
 export const isArray = obj => obj instanceof Array
 
 // 是对象，且不是null
@@ -8,3 +9,9 @@ export const isNumber = obj => typeof obj === 'number' && obj === obj
 
 // 是字符串
 export const isString = obj => typeof obj === 'string'
+
+// 是时间
+export const isDate = d => d instanceof Date
+
+// 是布尔值
+export const isBool = bool => bool === true || bool === false
