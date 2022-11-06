@@ -10,7 +10,7 @@ footer: MIT Licensed
 
 包括类型判断、防抖节流、本地缓存（有有效时间）、格式化时间、复制、深拷贝、cookie读写（子cookie读写）、获取设置DOM样式及生成RFC4122 u4版本的uuid等方法
 
-**js-tools-function 0.1.3 已经发布 :tada: ！**[地址](https://dreamforl.github.io/js-tools-function/)
+**js-tools-function 0.1.4 已经发布 :tada: ！**[地址](https://dreamforl.github.io/js-tools-function/)
 
 ### 安装
 
