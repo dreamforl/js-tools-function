@@ -20,7 +20,7 @@ export default {
       banner,
     },
     {
-      file: 'dist/index.es.js',
+      file: 'dist/index.js',
       format: 'es',
       name: 'tools',
       banner,
