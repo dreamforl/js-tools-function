@@ -209,6 +209,7 @@ window.fetch = zwFetch
 ```js
 import { random } from 'js-tools-function'
 random.getUuid() // 返回符合RFC4122 u4版本的uuid
+// 只能运用于本地127.0.0.1或者https
 // 4aa00c56-05db-4354-86ca-2ced34a877e7
 ```
 
